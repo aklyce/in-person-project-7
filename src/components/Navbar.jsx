@@ -1,9 +1,9 @@
 import { useState } from 'react';
-// TODO: Import useTheme from context
+import { useTheme } from '../context/ThemeContext.jsx';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // TODO: Get theme and toggleTheme from context
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <nav className="navbar">
@@ -22,16 +22,19 @@ const Navbar = () => {
           </ul>
 
           <div className="navbar-actions">
-            {/* TODO: Add theme toggle button */}
-            {/* Button should show sun icon for light mode, moon for dark */}
-            {/* onClick should call toggleTheme */}
-            <button className="theme-toggle">
-              🌞
+            <button
+              className="theme-toggle"
+              onClick={toggleTheme}
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            >
+              {theme === 'light' ? '🌞' : '🌙'}
             </button>
 
             <button
               className="menu-toggle"
               onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
             >
               <span></span>
               <span></span>
